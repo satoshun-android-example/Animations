@@ -13,5 +13,5 @@
 
   <fragment
     android:id="@+id/nav_property_values_holder"
-    android:name="com.github.satoshun.example.main.colorstatelistalpha.PropertyValuesHolderFragment" />
+    android:name="com.github.satoshun.example.main.propertyvalues.PropertyValuesHolderFragment" />
 </navigation>

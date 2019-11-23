@@ -1,4 +1,4 @@
-package com.github.satoshun.example.main.colorstatelistalpha
+package com.github.satoshun.example.main.propertyvalues
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.github.satoshun.example.R
 import com.github.satoshun.example.databinding.PropertyValuesHolderFragBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class PropertyValuesHolderFragment : Fragment(R.layout.property_values_holder_frag) {
   private lateinit var binding: PropertyValuesHolderFragBinding
@@ -18,11 +21,22 @@ class PropertyValuesHolderFragment : Fragment(R.layout.property_values_holder_fr
 
     val scaleX = PropertyValuesHolder.ofFloat(
       View.SCALE_X,
-      0.5f,
+      0.3f,
       1.0f
     )
-    ObjectAnimator.ofPropertyValuesHolder(binding.title, scaleX).apply {
-      interpolator = OvershootInterpolator()
-    }.start()
+    val alpha = PropertyValuesHolder.ofFloat(
+      View.ALPHA,
+      0.0f,
+      1.0f
+    )
+
+    lifecycleScope.launch {
+      while (true) {
+        delay(2000)
+        ObjectAnimator.ofPropertyValuesHolder(binding.title, scaleX, alpha)
+          .apply { interpolator = OvershootInterpolator() }
+          .start()
+      }
+    }
   }
 }
