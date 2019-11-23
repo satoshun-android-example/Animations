@@ -27,5 +27,8 @@ class MainFragment : Fragment() {
     binding.propertyValues.setOnClickListener {
       findNavController().navigate(R.id.nav_property_values_holder)
     }
+    binding.propertyAnimator.setOnClickListener {
+      findNavController().navigate(R.id.nav_property_animator)
+    }
   }
 }
