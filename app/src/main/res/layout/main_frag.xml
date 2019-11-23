@@ -21,4 +21,12 @@
     android:layout_marginTop="16dp"
     android:text="ViewPropertyAnimator"
     tools:ignore="HardcodedText" />
+
+  <Button
+    android:id="@+id/value_animator"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_marginTop="16dp"
+    android:text="ValueAnimator"
+    tools:ignore="HardcodedText" />
 </LinearLayout>

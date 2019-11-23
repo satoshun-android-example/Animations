@@ -18,4 +18,8 @@
   <fragment
     android:id="@+id/nav_property_animator"
     android:name="com.github.satoshun.example.main.ViewPropertyAnimatorFragment" />
+
+  <fragment
+    android:id="@+id/nav_value_animator"
+    android:name="com.github.satoshun.example.main.ValueAnimatorFragment" />
 </navigation>
