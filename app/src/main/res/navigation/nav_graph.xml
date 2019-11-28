@@ -26,4 +26,8 @@
   <fragment
     android:id="@+id/nav_transition_manager"
     android:name="com.github.satoshun.example.main.transitionmanager.TransitionManagerFragment" />
+
+  <fragment
+    android:id="@+id/nav_icon_animation"
+    android:name="com.github.satoshun.example.main.iconanimation.IconAnimationFragment" />
 </navigation>

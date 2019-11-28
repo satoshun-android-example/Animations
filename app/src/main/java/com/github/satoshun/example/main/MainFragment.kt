@@ -46,5 +46,8 @@ class MainFragment : Fragment() {
         extras
       )
     }
+    binding.iconAnimation.setOnClickListener {
+      findNavController().navigate(R.id.nav_icon_animation)
+    }
   }
 }
