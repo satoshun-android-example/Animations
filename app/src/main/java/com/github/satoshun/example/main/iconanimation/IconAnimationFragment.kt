@@ -1,6 +1,7 @@
 package com.github.satoshun.example.main.iconanimation
 
 import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.os.Bundle
@@ -30,6 +31,7 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     lifecycleScope.launch { icon4() }
     lifecycleScope.launch { icon5() }
     lifecycleScope.launch { icon6() }
+    lifecycleScope.launch { icon7() }
   }
 
   // PropertyValuesHolder + ROTATION
@@ -122,5 +124,78 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
       )
     )
     binding.icon6.startAnimation(anim)
+  }
+
+  private suspend fun icon7() {
+    binding.icon7.awaitPreDraw()
+
+    val set = AnimatorSet().apply {
+      playSequentially(
+        ObjectAnimator
+          .ofPropertyValuesHolder(
+            binding.icon7,
+            PropertyValuesHolder.ofFloat(
+              View.ROTATION,
+              0f,
+              25f
+            )
+          )
+          .setDuration(120L)
+          .apply {
+            interpolator = DecelerateInterpolator()
+          },
+        ObjectAnimator
+          .ofPropertyValuesHolder(
+            binding.icon7,
+            PropertyValuesHolder.ofFloat(
+              View.ROTATION,
+              25f,
+              -25f
+            )
+          )
+          .setDuration(250L),
+        ObjectAnimator
+          .ofPropertyValuesHolder(
+            binding.icon7,
+            PropertyValuesHolder.ofFloat(
+              View.ROTATION,
+              -25f,
+              18.75f
+            )
+          )
+          .setDuration(200L),
+        ObjectAnimator
+          .ofPropertyValuesHolder(
+            binding.icon7,
+            PropertyValuesHolder.ofFloat(
+              View.ROTATION,
+              18.75f,
+              -12.50f
+            )
+          )
+          .setDuration(150L),
+        ObjectAnimator
+          .ofPropertyValuesHolder(
+            binding.icon7,
+            PropertyValuesHolder.ofFloat(
+              View.ROTATION,
+              -12.50f,
+              6.25f
+            )
+          )
+          .setDuration(80L),
+        ObjectAnimator
+          .ofPropertyValuesHolder(
+            binding.icon7,
+            PropertyValuesHolder.ofFloat(
+              View.ROTATION,
+              6.25f,
+              0f
+            )
+          )
+          .setDuration(50L)
+      )
+      start()
+    }
   }
 }
