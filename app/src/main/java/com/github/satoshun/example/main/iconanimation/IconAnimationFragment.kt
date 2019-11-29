@@ -6,6 +6,7 @@ import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
+import android.view.animation.CycleInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
@@ -26,6 +27,8 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     icon1()
     lifecycleScope.launch { icon2() }
     lifecycleScope.launch { icon3() }
+    lifecycleScope.launch { icon4() }
+    lifecycleScope.launch { icon5() }
   }
 
   // PropertyValuesHolder + ROTATION
@@ -66,6 +69,32 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     val animator = AnimatorInflater.loadAnimator(requireContext(), R.animator.icon3)
       .apply {
         setTarget(binding.icon3)
+        start()
+      }
+  }
+
+  private suspend fun icon4() {
+    binding.icon4.awaitPreDraw()
+
+    val anim = RotateAnimation(
+      -10f,
+      10f,
+      binding.icon4.pivotX,
+      binding.icon4.pivotY
+    )
+    anim.duration = 1500
+    anim.interpolator = CycleInterpolator(5F)
+
+    binding.icon4.startAnimation(anim)
+  }
+
+
+  private suspend fun icon5() {
+    binding.icon5.awaitPreDraw()
+
+    val animator = AnimatorInflater.loadAnimator(requireContext(), R.animator.icon5)
+      .apply {
+        setTarget(binding.icon5)
         start()
       }
   }
