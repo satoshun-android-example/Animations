@@ -1,15 +1,19 @@
 package com.github.satoshun.example.main.iconanimation
 
+import android.animation.AnimatorInflater
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
-import android.view.animation.LinearInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.view.animation.RotateAnimation
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.github.satoshun.example.R
 import com.github.satoshun.example.databinding.IconAnimationFragBinding
+import com.github.satoshun.example.main.awaitPreDraw
+import kotlinx.coroutines.launch
 
 
 class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
@@ -20,9 +24,11 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     binding = IconAnimationFragBinding.bind(view)
 
     icon1()
-    icon2()
+    lifecycleScope.launch { icon2() }
+    lifecycleScope.launch { icon3() }
   }
 
+  // PropertyValuesHolder + ROTATION
   private fun icon1() {
     val rotate = PropertyValuesHolder.ofFloat(
       View.ROTATION,
@@ -31,19 +37,36 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     )
     ObjectAnimator.ofPropertyValuesHolder(binding.icon1, rotate)
       .setDuration(200L)
-      .apply {
-        repeatCount = 10
-      }
+      .apply { repeatCount = 10 }
       .start()
   }
 
-  private fun icon2() {
-    val anim = RotateAnimation(0f, 90f, 15f, 15f)
-    anim.interpolator = LinearInterpolator()
-    anim.repeatCount = Animation.INFINITE
+  // RotateAnimation
+  private suspend fun icon2() {
+    binding.icon2.awaitPreDraw()
+
+    val anim = RotateAnimation(
+      -50f,
+      50f,
+      binding.icon2.pivotX,
+      binding.icon2.pivotY
+    )
+    anim.interpolator = DecelerateInterpolator()
+    anim.repeatCount = 10
     anim.repeatMode = Animation.REVERSE
-    anim.duration = 700
+    anim.duration = 300
 
     binding.icon2.startAnimation(anim)
+  }
+
+  // animator
+  private suspend fun icon3() {
+    binding.icon3.awaitPreDraw()
+
+    val animator = AnimatorInflater.loadAnimator(requireContext(), R.animator.icon3)
+      .apply {
+        setTarget(binding.icon3)
+        start()
+      }
   }
 }
