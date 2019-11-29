@@ -11,4 +11,11 @@
     android:layout_height="64dp"
     android:layout_gravity="center"
     android:src="@drawable/ic_android_black_24dp" />
+
+  <ImageView
+    android:id="@+id/icon2"
+    android:layout_width="64dp"
+    android:layout_height="64dp"
+    android:layout_gravity="center"
+    android:src="@drawable/ic_android_black_24dp" />
 </LinearLayout>
