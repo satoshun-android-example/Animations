@@ -29,6 +29,7 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     lifecycleScope.launch { icon3() }
     lifecycleScope.launch { icon4() }
     lifecycleScope.launch { icon5() }
+    lifecycleScope.launch { icon6() }
   }
 
   // PropertyValuesHolder + ROTATION
@@ -97,5 +98,29 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
         setTarget(binding.icon5)
         start()
       }
+  }
+
+  private suspend fun icon6() {
+    binding.icon6.awaitPreDraw()
+
+    val anim = RotateAnimation(
+      -25f,
+      25f,
+      binding.icon4.pivotX,
+      binding.icon4.pivotY
+    )
+    anim.duration = 10000
+    anim.interpolator = LookupTableInterpolator(
+      floatArrayOf(
+        .50f, .40f, .30f, .20f, .10f, .00f, // 0.10f
+        .00f, .10f, .20f, .30f, .40f, .50f, .60f, .70f, .80f, .90f, 099f, // 0.10f
+        0925f, .85f, // 0.075
+        .775f, .70f, .625f, .55f, .475f, .40f, .325f, .25f, // 0.075
+        .30f, .35f, .40f, .45f, .50f, // 0.050
+        .475f, .45f, .425f, .40f, .375f, .350f, // 0.025
+        .375f, .400f, .425f, .450f, .475f, .500f // 0.025
+      )
+    )
+    binding.icon6.startAnimation(anim)
   }
 }
