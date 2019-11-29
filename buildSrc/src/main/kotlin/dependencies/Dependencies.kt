@@ -22,6 +22,8 @@ const val KTX = "androidx.core:core-ktx:1.2.0-rc01"
 const val ACTIVITYX = "androidx.activity:activity-ktx:1.0.0"
 const val FRAGMENTX = "androidx.fragment:fragment-ktx:1.1.0"
 
+const val LOTTIE = "com.airbnb.android:lottie:3.2.2"
+
 const val TRANSITION = "androidx.transition:transition:1.2.0"
 const val INTERPOLATOR = "androidx.interpolator:interpolator:1.0.0"
 

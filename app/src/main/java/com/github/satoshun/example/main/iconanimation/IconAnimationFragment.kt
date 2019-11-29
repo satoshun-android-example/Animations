@@ -32,6 +32,7 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     lifecycleScope.launch { icon5() }
     lifecycleScope.launch { icon6() }
     lifecycleScope.launch { icon7() }
+    lifecycleScope.launch { icon8() }
   }
 
   // PropertyValuesHolder + ROTATION
@@ -197,5 +198,11 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
       )
       start()
     }
+  }
+
+  private suspend fun icon8() {
+    binding.icon8.awaitPreDraw()
+
+    binding.icon8.playAnimation()
   }
 }

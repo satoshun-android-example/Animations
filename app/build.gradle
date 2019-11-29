@@ -58,6 +58,8 @@ dependencies {
   implementation TRANSITION
   implementation INTERPOLATOR
 
+  implementation LOTTIE
+
   implementation GLIDE
 
   implementation WEBKIT
