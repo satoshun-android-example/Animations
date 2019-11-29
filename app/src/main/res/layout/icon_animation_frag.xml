@@ -88,8 +88,19 @@
     android:layout_width="32dp"
     android:layout_height="32dp"
     android:layout_gravity="center"
-    app:lottie_imageAssetsFolder="image"
     app:lottie_autoPlay="false"
     app:lottie_fileName="rotate.json"
+    app:lottie_imageAssetsFolder="image"
     app:lottie_loop="true" />
+
+  <Space
+    android:layout_width="match_parent"
+    android:layout_height="32dp" />
+
+  <ImageView
+    android:id="@+id/icon9"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:layout_gravity="center"
+    android:src="@drawable/ic_add_alert_black_24dp" />
 </LinearLayout>

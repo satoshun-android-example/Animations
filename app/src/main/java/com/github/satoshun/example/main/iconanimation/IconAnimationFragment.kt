@@ -33,6 +33,7 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
     lifecycleScope.launch { icon6() }
     lifecycleScope.launch { icon7() }
     lifecycleScope.launch { icon8() }
+    lifecycleScope.launch { icon9() }
   }
 
   // PropertyValuesHolder + ROTATION
@@ -130,7 +131,7 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
   private suspend fun icon7() {
     binding.icon7.awaitPreDraw()
 
-    val set = AnimatorSet().apply {
+    AnimatorSet().apply {
       playSequentially(
         ObjectAnimator
           .ofPropertyValuesHolder(
@@ -205,4 +206,32 @@ class IconAnimationFragment : Fragment(R.layout.icon_animation_frag) {
 
     binding.icon8.playAnimation()
   }
+
+  private suspend fun icon9() {
+    binding.icon9.awaitPreDraw()
+
+    AnimatorSet().apply {
+      playSequentially(
+        binding.icon9.rotate(0f, 25f, 120)
+          .apply { interpolator = DecelerateInterpolator() },
+        binding.icon9.rotate(25f, -25f, 250),
+        binding.icon9.rotate(-25f, 18.75f, 200),
+        binding.icon9.rotate(18.75f, -12.50f, 150),
+        binding.icon9.rotate(-12.50f, 6.25f, 100L),
+        binding.icon9.rotate(6.25f, 0f, 50L)
+      )
+      awaitStart()
+    }
+  }
 }
+
+private fun View.rotate(from: Float, to: Float, duration: Long) = ObjectAnimator
+  .ofPropertyValuesHolder(
+    this,
+    PropertyValuesHolder.ofFloat(
+      View.ROTATION,
+      from,
+      to
+    )
+  )
+  .setDuration(duration)
