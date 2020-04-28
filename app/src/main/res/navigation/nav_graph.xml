@@ -7,9 +7,7 @@
   <fragment
     android:id="@+id/nav_home"
     android:name="com.github.satoshun.example.main.MainFragment"
-    tools:layout="@layout/main_frag">
-
-  </fragment>
+    tools:layout="@layout/main_frag" />
 
   <fragment
     android:id="@+id/nav_property_values_holder"
@@ -30,4 +28,9 @@
   <fragment
     android:id="@+id/nav_icon_animation"
     android:name="com.github.satoshun.example.main.iconanimation.IconAnimationFragment" />
+
+  <fragment
+    android:id="@+id/nav_scale_icon_animation"
+    android:name="com.github.satoshun.example.main.scale.ScaleFragment"
+    tools:layout="@layout/scale_icon_frag" />
 </navigation>
