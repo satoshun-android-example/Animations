@@ -3,6 +3,7 @@ package com.github.satoshun.example.main.scale
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.github.satoshun.example.R
@@ -25,7 +26,8 @@ private fun getScaleAnimator(view: View): ValueAnimator {
   val animator: ValueAnimator = ValueAnimator.ofFloat(0.8f, 1f)
   // FastOutLinearInInterpolator
   // LinearOutSlowInInterpolator
-  animator.interpolator = FastOutSlowInInterpolator()
+//  animator.interpolator = FastOutSlowInInterpolator()
+  animator.interpolator = DecelerateInterpolator()
   animator.duration = 200L
   animator.addUpdateListener { animation ->
     val scale: Float = animation.animatedValue as Float
