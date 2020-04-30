@@ -3,7 +3,9 @@ package com.github.satoshun.example.main.scale
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
+import android.view.animation.ScaleAnimation
 import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.github.satoshun.example.R
@@ -19,14 +21,15 @@ class ScaleFragment : Fragment(R.layout.scale_icon_frag) {
     binding.icon1.setOnClickListener {
       getScaleAnimator(binding.icon1).start()
     }
+
+    binding.icon2.setOnClickListener {
+      startScaleAnimator2(binding.icon2)
+    }
   }
 }
 
 private fun getScaleAnimator(view: View): ValueAnimator {
-  val animator: ValueAnimator = ValueAnimator.ofFloat(0.8f, 1f)
-  // FastOutLinearInInterpolator
-  // LinearOutSlowInInterpolator
-//  animator.interpolator = FastOutSlowInInterpolator()
+  val animator: ValueAnimator = ValueAnimator.ofFloat(0.7f, 1f)
   animator.interpolator = DecelerateInterpolator()
   animator.duration = 200L
   animator.addUpdateListener { animation ->
@@ -35,4 +38,16 @@ private fun getScaleAnimator(view: View): ValueAnimator {
     view.scaleY = scale
   }
   return animator
+}
+
+private fun startScaleAnimator2(view: View) {
+  val animation = ScaleAnimation(
+    0.7f, 1f,
+    0.7f, 1f,
+    Animation.RELATIVE_TO_SELF, 0.5f,
+    Animation.RELATIVE_TO_SELF, 0.5f
+  )
+  animation.duration = 200L
+  animation.interpolator = DecelerateInterpolator()
+  view.startAnimation(animation)
 }
