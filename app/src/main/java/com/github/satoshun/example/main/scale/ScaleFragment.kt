@@ -1,5 +1,7 @@
 package com.github.satoshun.example.main.scale
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.View
@@ -7,7 +9,6 @@ import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.ScaleAnimation
 import androidx.fragment.app.Fragment
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.github.satoshun.example.R
 import com.github.satoshun.example.databinding.ScaleIconFragBinding
 
@@ -74,15 +75,13 @@ private fun startScaleAnimator3(view: View) {
 }
 
 private fun startScaleAnimator4(view: View) {
-  val animation = ScaleAnimation(
-    0.7f, 1f,
-    0.7f, 1f,
-    Animation.RELATIVE_TO_SELF, 0.5f,
-    Animation.RELATIVE_TO_SELF, 0.5f
+  val animator = ObjectAnimator.ofPropertyValuesHolder(
+    view,
+    PropertyValuesHolder.ofFloat(View.SCALE_X, 1.0f, 0.7f, 1.0f),
+    PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.0f, 0.7f, 1.0f)
   )
-  animation.duration = 200L
-  animation.interpolator = DecelerateInterpolator()
-  animation.repeatMode = Animation.REVERSE
-  animation.repeatCount = 1
-  view.startAnimation(animation)
+  animator.duration = 200L
+  animator.interpolator = DecelerateInterpolator()
+
+  animator.start()
 }
