@@ -19,25 +19,30 @@ class ScaleFragment : Fragment(R.layout.scale_icon_frag) {
     binding = ScaleIconFragBinding.bind(view)
 
     binding.icon1.setOnClickListener {
-      getScaleAnimator(binding.icon1).start()
+      startAnimator1(binding.icon1)
     }
 
     binding.icon2.setOnClickListener {
       startScaleAnimator2(binding.icon2)
     }
+
+    binding.icon3.setOnClickListener {
+      startScaleAnimator3(binding.icon3)
+    }
   }
 }
 
-private fun getScaleAnimator(view: View): ValueAnimator {
+private fun startAnimator1(view: View) {
   val animator: ValueAnimator = ValueAnimator.ofFloat(0.7f, 1f)
   animator.interpolator = DecelerateInterpolator()
   animator.duration = 200L
   animator.addUpdateListener { animation ->
     val scale: Float = animation.animatedValue as Float
+    println("startAnimator1 $scale")
     view.scaleX = scale
     view.scaleY = scale
   }
-  return animator
+  animator.start()
 }
 
 private fun startScaleAnimator2(view: View) {
@@ -50,4 +55,16 @@ private fun startScaleAnimator2(view: View) {
   animation.duration = 200L
   animation.interpolator = DecelerateInterpolator()
   view.startAnimation(animation)
+}
+
+private fun startScaleAnimator3(view: View) {
+  view.scaleX = 0.7f
+  view.scaleY = 0.7f
+
+  view.animate()
+    .setInterpolator(DecelerateInterpolator())
+    .scaleX(1f)
+    .scaleY(1f)
+    .setDuration(200L)
+    .start()
 }
