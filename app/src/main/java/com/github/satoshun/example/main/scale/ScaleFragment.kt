@@ -29,6 +29,10 @@ class ScaleFragment : Fragment(R.layout.scale_icon_frag) {
     binding.icon3.setOnClickListener {
       startScaleAnimator3(binding.icon3)
     }
+
+    binding.icon4.setOnClickListener {
+      startScaleAnimator4(binding.icon4)
+    }
   }
 }
 
@@ -67,4 +71,18 @@ private fun startScaleAnimator3(view: View) {
     .scaleY(1f)
     .setDuration(200L)
     .start()
+}
+
+private fun startScaleAnimator4(view: View) {
+  val animation = ScaleAnimation(
+    0.7f, 1f,
+    0.7f, 1f,
+    Animation.RELATIVE_TO_SELF, 0.5f,
+    Animation.RELATIVE_TO_SELF, 0.5f
+  )
+  animation.duration = 200L
+  animation.interpolator = DecelerateInterpolator()
+  animation.repeatMode = Animation.REVERSE
+  animation.repeatCount = 1
+  view.startAnimation(animation)
 }
